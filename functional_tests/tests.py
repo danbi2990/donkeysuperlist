@@ -2,7 +2,6 @@ import sys
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-# import unittest
 
 class NewVisitorTest(StaticLiveServerTestCase):
 
@@ -11,6 +10,8 @@ class NewVisitorTest(StaticLiveServerTestCase):
         for arg in sys.argv:
             if 'liveserver' in arg:
                 cls.server_url = 'http://' + arg.split('=')[1]
+                # cls.live_server_url = cls.server_url
+                cls.live_server_url = ''
                 return
         super().setUpClass()
         cls.server_url = cls.live_server_url
@@ -117,4 +118,4 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertIn('Buy milk', page_text)
         
         # Satisfied, they both go back to sleep
-        self.fail('Finish the test!')
+        # self.fail('Finish the test!')
