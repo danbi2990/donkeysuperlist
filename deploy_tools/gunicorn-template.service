@@ -1,0 +1,17 @@
+[Unit]
+Description=Gunicorn server for SITENAME
+Requires=gunicorn-SITENAME.socket
+After=network.target
+
+[Service]
+PIDFile=/run/gunicorn-SITENAME/pid
+User=ubuntu
+Group=ubuntu
+RuntimeDirectory=gunicorn-SITENAME
+WorkingDirectory=/home/ubuntu/sites/SITENAME/source
+ExecStart=/home/ubuntu/sites/SITENAME/virtualenv/bin/gunicorn --pid /run/gunicorn-SITENAME/pid --bind unix:/tmp/SITENAME.socket superlists.wsgi:application
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+
+[Install]
+WantedBy=multi-user.target
